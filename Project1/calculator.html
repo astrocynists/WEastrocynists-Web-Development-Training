@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .calculator {
+            width: 320px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .calculator input {
+            width: 100%;
+            height: 60px;
+            text-align: right;
+            font-size: 24px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            box-sizing: border-box;
+            margin-bottom: 20px;
+            background-color: #f7f7f7;
+        }
+
+        .calculator button {
+            width: 60px;
+            height: 60px;
+            font-size: 20px;
+            margin: 5px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .calculator button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .calculator button.operator {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .calculator button.operator:hover {
+            background-color: #e67e22;
+        }
+
+        .calculator button.equals {
+            background-color: #2ecc71;
+            color: white;
+            width: 130px;
+        }
+
+        .calculator button.equals:hover {
+            background-color: #27ae60;
+        }
+
+        .calculator button.clear {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .calculator button.clear:hover {
+            background-color: #c0392b;
+        }
+    </style>
+</head>
+<body>
+
+<div class="calculator">
+    <input type="text" id="display" disabled>
+    <div>
+        <button class="clear" onclick="clearDisplay()">C</button>
+        <button class="operator" onclick="appendToDisplay('/')">/</button>
+        <button class="operator" onclick="appendToDisplay('*')">*</button>
+        <button class="operator" onclick="appendToDisplay('-')">-</button>
+    </div>
+    <div>
+        <button onclick="appendToDisplay('7')">7</button>
+        <button onclick="appendToDisplay('8')">8</button>
+        <button onclick="appendToDisplay('9')">9</button>
+        <button class="operator" onclick="appendToDisplay('+')">+</button>
+    </div>
+    <div>
+        <button onclick="appendToDisplay('4')">4</button>
+        <button onclick="appendToDisplay('5')">5</button>
+        <button onclick="appendToDisplay('6')">6</button>
+    </div>
+    <div>
+        <button onclick="appendToDisplay('1')">1</button>
+        <button onclick="appendToDisplay('2')">2</button>
+        <button onclick="appendToDisplay('3')">3</button>
+    </div>
+    <div>
+        <button onclick="appendToDisplay('0')">0</button>
+        <button onclick="appendToDisplay('.')">.</button>
+        <button class="equals" onclick="calculateResult()">=</button>
+    </div>
+</div>
+
+<script>
+    let currentInput = ''; // Store the current input
+    let lastResult = ''; // Store the last result for chained operations
+
+    function appendToDisplay(value) {
+        // Append the clicked value to the current input
+        if (value === '.' && currentInput.includes('.')) {
+            // Prevent multiple decimal points in a number
+            return;
+        }
+
+        currentInput += value;
+        updateDisplay();
+    }
+
+    function clearDisplay() {
+        currentInput = ''; // Reset current input
+        lastResult = ''; // Reset the last result
+        updateDisplay();
+    }
+
+    function updateDisplay() {
+        document.getElementById('display').value = currentInput || lastResult || '0';
+    }
+
+    function calculateResult() {
+        try {
+            // Calculate the result using the Function constructor to safely evaluate the input
+            let result = Function('"use strict";return (' + currentInput + ')')();
+            lastResult = result.toString(); // Store result for chaining operations
+            currentInput = ''; // Clear the input for the next operation
+        } catch (e) {
+            // If an error occurs, display 'Error'
+            lastResult = 'Error';
+        }
+        updateDisplay();
+    }
+</script>
+
+</body>
+</html>

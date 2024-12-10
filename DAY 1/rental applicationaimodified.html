@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Studio Rental Application Form</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        h1 {
+            color: purple;
+            text-align: center;
+        }
+        form {
+            background-color: white;
+            color: black;
+            text-align: center;
+            font-size: large;
+            padding: 40px;
+            margin: 20px auto;
+            width: 600px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+        input[type="text"], input[type="email"], input[type="date"], textarea {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        input[type="submit"] {
+            background-color: purple;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            background-color: darkviolet;
+        }
+    </style>
+</head>
+<body>
+    <h1>Studio Rental Application Form</h1>
+    <form action="" method="POST">
+        <label for="organisation">Name of Organisation</label>
+        <input type="text" id="organisation" name="organisation" required>
+        
+        <label for="contactFirst">Main Contact - First Name</label>
+        <input type="text" id="contactFirst" name="contactFirst" placeholder="First" required>
+        
+        <label for="contactLast">Main Contact - Last Name</label>
+        <input type="text" id="contactLast" name="contactLast" placeholder="Last" required>
+        
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" required>
+        
+        <label for="description">Please provide a brief description of your rental request</label>
+        <textarea id="description" name="description" rows="5" required></textarea>
+        
+        <label for="startDate">Start Date</label>
+        <input type="date" id="startDate" name="startDate" required>
+        
+        <label for="endDate">End Date</label>
+        <input type="date" id="endDate" name="endDate" required>
+        
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>x
